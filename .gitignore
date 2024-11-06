@@ -1,0 +1,14 @@
+
+node_modules
+.env
+keys
+*.keys
+*~
+*#
+.DS_STORE
+*.iml
+.vscode
+.node_history
+.eslintcache
+*.package-lock.json
+*.lock

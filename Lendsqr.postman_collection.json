@@ -1,0 +1,866 @@
+{
+	"info": {
+		"_postman_id": "5203ea1b-a26f-4763-a4dd-4ab7c263abdf",
+		"name": "Lendsqr",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7043729"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// example using pm.response.to.have\r",
+									"pm.test(\"Get & save usertoken\", function () {\r",
+									"    pm.environment.unset(\"phone\");\r",
+									"    pm.environment.unset(\"password\");\r",
+									"\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.environment.set(\"token\", jsonData.data.token);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.unset(\"token\");\r",
+									"pm.environment.set(\"email\", 'clement.bere@gmail.com');\r",
+									"pm.environment.set(\"password\", 'A12345678b');"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"{{email}}\",\r\n    \"password\":\"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/auth/login",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"{{email}}\",\r\n    \"password\":\"{{password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/auth/login",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "859"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"35b-SXGmxoDaw+HNQl3nou9Qt19EA4Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 Nov 2024 22:55:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjQtMTEtMDRUMjI6NTU6MzIuMjUzWiIsImlhdCI6MTczMDc2MDkzMiwiZXhwIjoxNzMwODQ3MzMyfQ.vcxY4MoA--iDKx3Aw23V27r07rsAG2nZ4rr_7G923rg\",\n        \"user\": {\n            \"user\": {\n                \"id\": 1,\n                \"firstName\": \"bere\",\n                \"lastName\": \"clement\",\n                \"email\": \"clement.bere@gmail.com\",\n                \"avatar\": \"/profile_image/default.png\",\n                \"email_verified_at\": \"2024-11-04T20:34:26.584Z\",\n                \"country\": \"NG\",\n                \"remember_token\": null,\n                \"created_at\": \"2024-11-04T20:34:26.584Z\",\n                \"updated_at\": \"2024-11-04T20:34:26.584Z\",\n                \"banned_at\": null,\n                \"deleted_at\": null,\n                \"profile\": {\n                    \"id\": 1,\n                    \"user_id\": \"1\",\n                    \"bio\": null,\n                    \"avatar\": null,\n                    \"created_at\": \"2024-11-04T20:34:26.658Z\",\n                    \"updated_at\": null\n                },\n                \"wallets\": {\n                    \"id\": 1,\n                    \"user_id\": 1,\n                    \"amount\": 0,\n                    \"created_at\": \"2024-11-04T20:34:27.000Z\",\n                    \"updated_at\": \"2024-11-04T20:34:27.000Z\"\n                },\n                \"isPin\": false\n            },\n            \"totalBalance\": 0\n        }\n    },\n    \"message\": \"Login successful\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// example using pm.response.to.have\r",
+									"pm.test(\"Get & save usertoken\", function () {\r",
+									"    pm.environment.unset(\"firstName\");\r",
+									"    pm.environment.unset(\"lastName\");\r",
+									"    pm.environment.unset(\"email\");\r",
+									"    pm.environment.unset(\"password\");\r",
+									"\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.environment.set(\"token\", jsonData.data.token);\r",
+									"});s"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.unset(\"token\");\r",
+									"pm.environment.set(\"firstName\", 'bere');\r",
+									"pm.environment.set(\"lastName\", 'clement');\r",
+									"pm.environment.set(\"email\", 'clement.bere@gmail.com');\r",
+									"pm.environment.set(\"password\", 'A12345678b');"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\":\"{{firstName}}\",\r\n    \"lastName\":\"{{lastName}}\",\r\n    \"email\":\"{{email}}\",\r\n    \"password\":\"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/auth/register",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\":\"{{firstName}}\",\r\n    \"lastName\":\"{{lastName}}\",\r\n    \"email\":\"{{email}}\",\r\n    \"password\":\"{{password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/auth/register",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "867"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"363-uv8XNJvAtReUSWvAu6DcQeAMtHk\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 Nov 2024 20:34:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjQtMTEtMDRUMjA6MzQ6MjYuNjY0WiIsImlhdCI6MTczMDc1MjQ2NiwiZXhwIjoxNzMwODM4ODY2fQ.1raLnottvOrVRQjvkkNkv_kupgpn7rLBnpromfbtYpc\",\n        \"user\": {\n            \"user\": {\n                \"id\": 1,\n                \"firstName\": \"bere\",\n                \"lastName\": \"clement\",\n                \"email\": \"clement.bere@gmail.com\",\n                \"avatar\": \"/profile_image/default.png\",\n                \"email_verified_at\": \"2024-11-04T20:34:26.584Z\",\n                \"country\": \"NG\",\n                \"remember_token\": null,\n                \"created_at\": \"2024-11-04T20:34:26.584Z\",\n                \"updated_at\": \"2024-11-04T20:34:26.584Z\",\n                \"banned_at\": null,\n                \"deleted_at\": null,\n                \"profile\": {\n                    \"id\": 1,\n                    \"user_id\": \"1\",\n                    \"bio\": null,\n                    \"avatar\": null,\n                    \"created_at\": \"2024-11-04T20:34:26.658Z\",\n                    \"updated_at\": null\n                },\n                \"wallets\": {\n                    \"id\": 1,\n                    \"user_id\": 1,\n                    \"amount\": 0,\n                    \"created_at\": \"2024-11-04T20:34:27.000Z\",\n                    \"updated_at\": \"2024-11-04T20:34:27.000Z\"\n                },\n                \"isPin\": false\n            },\n            \"totalBalance\": 0\n        }\n    },\n    \"message\": \"Registration successful \"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Wallet",
+			"item": [
+				{
+					"name": "Fund Account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\":\"10000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/wallet/fund",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"wallet",
+								"fund"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Fund Account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"amount\":\"10000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/wallet/fund",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"wallet",
+										"fund"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "207"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"cf-uW17/y0XsBOhbqXlfxNJXosqOG8\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Nov 2024 09:26:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"data\": {\n        \"accountNumber\": 667995996,\n        \"bankName\": \"Lendsqr\",\n        \"note\": \"Make a tranfer of ₦10000 to the details\",\n        \"reference\": \"lendsqr_funding_2024110564171142624\"\n    },\n    \"message\": \"Fund wallet successful\"\n}"
+						}
+					]
+				},
+				{
+					"name": "P2P",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\":\"10000\",\r\n    \"to\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/wallet/p2p",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"wallet",
+								"p2p"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "P2P",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"amount\":\"10000\",\r\n    \"to\":\"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/wallet/p2p",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"wallet",
+										"p2p"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "61"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3d-OC7E7UsGMo4LwQ8OCvq2g1arzxA\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Nov 2024 05:50:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"data\": {},\n    \"message\": \"Processing transaction \"\n}"
+						}
+					]
+				},
+				{
+					"name": "Withdrawal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\":\"10000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/wallet/withdraw",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"wallet",
+								"withdraw"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Withdrawal",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"amount\":\"10000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/wallet/withdraw",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"wallet",
+										"withdraw"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "57"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"39-0ySF7VQY3qHWi4sW9hktRvuvZro\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Nov 2024 06:32:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"data\": {},\n    \"message\": \"Insufficient Funds\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Verify Funding",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/wallet/verify-fund/lendsqr_funding_2024110564171142624",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"wallet",
+								"verify-fund",
+								"lendsqr_funding_2024110564171142624"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Verify Funding",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/wallet/verify-fund/lendsqr_funding_2024110564171142624",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"wallet",
+										"verify-fund",
+										"lendsqr_funding_2024110564171142624"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "61"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3d-OC7E7UsGMo4LwQ8OCvq2g1arzxA\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Nov 2024 09:41:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"data\": {},\n    \"message\": \"Processing transaction \"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Pin",
+			"item": [
+				{
+					"name": "Create Pin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pin\":\"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/pin/set-pin",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"pin",
+								"set-pin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Pin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"pin\":\"1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/pin/set-pin",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"pin",
+										"set-pin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"38-zCZcrUkgmEOQlnn6SHHjyJlzRbw\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 Nov 2024 23:09:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"data\": {},\n    \"message\": \"Pin set successful\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "View",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/profile/",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"profile",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "View",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/profile/",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"profile",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "557"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"22d-SrFqWl1VLfL2g0qtx5nzoUDrz58\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Nov 2024 09:51:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"data\": {\n        \"id\": 1,\n        \"firstName\": \"bere\",\n        \"lastName\": \"clement\",\n        \"email\": \"clement.bere@gmail.com\",\n        \"avatar\": null,\n        \"email_verified_at\": \"2024-11-04T20:34:26.584Z\",\n        \"country\": \"NG\",\n        \"created_at\": \"2024-11-04T20:34:26.584Z\",\n        \"updated_at\": \"2024-11-04T20:34:26.584Z\",\n        \"banned_at\": null,\n        \"profile\": {\n            \"id\": 1,\n            \"user_id\": \"1\",\n            \"bio\": null,\n            \"avatar\": null,\n            \"created_at\": \"2024-11-04T20:34:26.658Z\",\n            \"updated_at\": null\n        },\n        \"wallets\": {\n            \"id\": 1,\n            \"user_id\": 1,\n            \"amount\": 1000000,\n            \"created_at\": \"2024-11-04T20:34:27.000Z\",\n            \"updated_at\": \"2024-11-04T20:34:27.000Z\"\n        }\n    },\n    \"message\": \"Profile view successful\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
